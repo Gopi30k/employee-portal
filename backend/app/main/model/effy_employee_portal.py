@@ -11,6 +11,7 @@ class Company(db.Model):
     latitude = db.Column(db.Numeric(precision=9, scale=6), nullable=False)
     longitude = db.Column(db.Numeric(
         precision=9, scale=6), nullable=False)
+    employee = db.relationship('Employee', backref='company', lazy=True)
 
     def __repr__(self):
         return "<Company '{}'>".format(self.cId)
@@ -32,3 +33,21 @@ class Address(db.Model):
 
     def __repr__(self):
         return "<Address '{}'>".format(self.aId)
+
+
+class Employee(db.Model):
+    """ Employee Model for storing employee details """
+    __tablename__ = "Employee"
+
+    eId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    firstName = db.Column(db.String(45), nullable=False)
+    lastName = db.Column(db.String(45), nullable=True)
+    email = db.Column(db.String(50), nullable=False)
+    designation = db.Column(db.String(45), nullable=True)
+    DOB = db.Column(db.DateTime, nullable=False)
+    active = db.Column(db.Boolean, nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey('Company.cId'),
+                           nullable=False)
+
+    def __repr__(self):
+        return "<Employee '{}'>".format(self.eId)
