@@ -15,8 +15,8 @@ def create_address(address_data):
                               )
         if(save_to_database(new_address)):
             return {
-                'message': 'Address successfully added.',
-                'data': new_address.__str__()
+                'status': 'success',
+                'message': 'Address successfully added'
             }
         else:
             return{

@@ -32,3 +32,18 @@ class CompanyDTO:
         'latitude': fields.String(required=False, description='Latitude of company location'),
         'longitude': fields.String(required=False, description='Longitude of company location')
     })
+
+
+class EmployeeDTO:
+    api = Namespace('employee', description='Endpoint to manage Employee')
+    employee = api.model('employee',
+                         {
+                             'firstName': fields.String(required=True, description='First Name of employee'),
+                             'lastName': fields.String(required=False, description='Last Name of employee'),
+                             'email': fields.String(required=True, description='Email ID of employee'),
+                             'designation': fields.String(required=False, description='Designation of employee'),
+                             'DOB': fields.DateTime(required=True, description='Date of Birth of employee'),
+                             'active': fields.Boolean(required=True, description='Active state of employee'),
+                             'company_id': fields.Integer(required=True, description='Company ID where an employee is working'),
+
+                         })

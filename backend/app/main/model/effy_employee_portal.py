@@ -28,8 +28,8 @@ class Address(db.Model):
     state = db.Column(db.String(45), nullable=False)
     country = db.Column(db.String(45), nullable=False)
     pincode = db.Column(db.String(10), nullable=False)
-    company_id = db.Column(db.Integer, db.ForeignKey('Company.cId'),
-                           nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey(
+        'Company.cId'), nullable=True)
 
     def __str__(self):
         return """{doorNo} {street} {city} {pincode} {state} {country}""".format(
