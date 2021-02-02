@@ -31,8 +31,12 @@ class Address(db.Model):
     company_id = db.Column(db.Integer, db.ForeignKey('Company.cId'),
                            nullable=False)
 
-    def __repr__(self):
-        return "<Address '{}'>".format(self.aId)
+    def __str__(self):
+        return """{doorNo} {street} {city} {pincode} {state} {country}""".format(
+            doorNo=self.doorNo, street=self.streetName, city=self.city, state=self.state, country=self.country, pincode=self.pincode)
+
+    # def __repr__(self):
+    #     return "<Address '{}'>".format(self.aId)
 
 
 class Employee(db.Model):
