@@ -13,6 +13,6 @@ api = Api(blueprint,
           description='Manage all your employee and company details easily'
           )
 
-api.add_namespace(address_ns, path='/address')
+# api.add_namespace(address_ns, path='/address')
 api.add_namespace(company_ns, path='/company')
 api.add_namespace(employee_ns, path='/employee')
