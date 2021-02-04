@@ -14,6 +14,9 @@ import { PasswordModule } from "primeng/password";
 import { TooltipModule } from "primeng/tooltip";
 import { OverlayPanelModule } from "primeng/overlaypanel";
 import { TabViewModule } from "primeng/tabview";
+import { TableModule } from "primeng/table";
+import { CalendarModule } from "primeng/calendar";
+import { DropdownModule } from "primeng/dropdown";
 
 export const primengComponents = [
   ButtonModule,
@@ -30,6 +33,9 @@ export const primengComponents = [
   TooltipModule,
   OverlayPanelModule,
   TabViewModule,
+  TableModule,
+  CalendarModule,
+  DropdownModule,
 ];
 
 @NgModule({

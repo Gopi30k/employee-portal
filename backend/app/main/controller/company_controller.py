@@ -11,7 +11,7 @@ _company = CompanyDTO.company
 @api.route('/')
 class ListCompany(Resource):
     @api.doc('list_of_all_companies')
-    @api.marshal_list_with(_company, envelope='company')
+    @api.marshal_list_with(_company)
     def get(self):
         """List all created Company"""
         return get_all_companies()

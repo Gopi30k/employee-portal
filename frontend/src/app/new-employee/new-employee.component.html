@@ -1,0 +1,167 @@
+<form
+  id="employee-form"
+  [formGroup]="newEmployeeForm"
+  (ngSubmit)="addNewEmployee()"
+>
+  <div class="ui-fluid p-grid">
+    <div class="p-field p-col-12 p-md-6">
+      <label for="firstname">FirstName</label>
+      <input
+        id="firstname"
+        type="text"
+        formControlName="firstName"
+        autocomplete="off"
+        pInputText
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          (employeeFormControl.firstName.touched || submitted) &&
+          employeeFormControl.firstName.errors?.required
+        "
+      >
+        First Name is required
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="lastname">LastName</label>
+      <input
+        id="lastname"
+        type="text"
+        formControlName="lastName"
+        autocomplete="off"
+        pInputText
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          (employeeFormControl.lastName.touched || submitted) &&
+          employeeFormControl.lastName.errors?.required
+        "
+      >
+        Last Name is required
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-12">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        autocomplete="off"
+        formControlName="email"
+        pInputText
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          (employeeFormControl.email.touched || submitted) &&
+          employeeFormControl.email.errors?.required
+        "
+      >
+        Email is required
+      </span>
+      <!-- <span
+      class="text-danger"
+      *ngIf="
+        employeeFormControl.email.touched &&
+        employeeFormControl.email.errors?.email
+      "
+    >
+      Enter a valid email address
+    </span> -->
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="designation">Designation</label>
+      <input
+        id="designation"
+        type="text"
+        formControlName="designation"
+        autocomplete="off"
+        pInputText
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          (employeeFormControl.designation.touched || submitted) &&
+          employeeFormControl.designation.errors?.required
+        "
+      >
+        Designation is required
+      </span>
+    </div>
+  </div>
+  <div class="p-field p-col-12 p-md-6">
+    <label for="DOB">Date of Birth</label>
+
+    <p-calendar
+      id="DOB"
+      formControlName="DOB"
+      [yearNavigator]="true"
+      [monthNavigator]="true"
+      dateFormat="yy/mm/dd"
+      [yearRange]="yearString"
+      [showIcon]="true"
+      icon="pi pi-calendar"
+      placeholder="YYYY/MM/DD"
+    ></p-calendar>
+    <span
+      class="text-danger"
+      *ngIf="
+        (employeeFormControl.DOB.touched || submitted) &&
+        employeeFormControl.DOB.errors?.required
+      "
+    >
+      DOB is required
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-md-6">
+    <label for="active">Active</label>
+    <!--
+    <p-checkbox
+      id="designation"
+      [formControl]="newEmployeeForm.controls['active']"
+    ></p-checkbox> -->
+
+    <mat-checkbox formControlName="active"></mat-checkbox>
+
+    <!-- <span
+      class="text-danger"
+      *ngIf="
+        (employeeFormControl.designation.touched || submitted) &&
+        employeeFormControl.designation.errors?.required
+      "
+    >
+      Designation is required
+    </span> -->
+  </div>
+  <div class="p-field p-col-12 p-md-6">
+    <label for="company">Company</label>
+
+    <p-dropdown
+      [options]="listOfCompanies"
+      formControlName="company"
+      optionLabel="name"
+      [filter]="true"
+      placeholder="Select a Company"
+    ></p-dropdown>
+
+    <span
+      class="text-danger"
+      *ngIf="
+        (employeeFormControl.company.touched || submitted) &&
+        employeeFormControl.company.errors?.required
+      "
+    >
+      Designation is required
+    </span>
+  </div>
+  <div class="signup-btn">
+    <button
+      type="submit"
+      label="Sign Up"
+      class="ui-button-raised"
+      pButton
+    ></button>
+  </div>
+</form>

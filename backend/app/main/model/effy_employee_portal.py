@@ -48,7 +48,7 @@ class Employee(db.Model):
     lastName = db.Column(db.String(45), nullable=True)
     email = db.Column(db.String(50), nullable=False)
     designation = db.Column(db.String(45), nullable=True)
-    DOB = db.Column(db.DateTime, nullable=False)
+    DOB = db.Column(db.Date, nullable=False)
     active = db.Column(db.Boolean, nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey('Company.cId'),
                            nullable=False)
