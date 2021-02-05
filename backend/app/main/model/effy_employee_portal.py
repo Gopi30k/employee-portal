@@ -51,7 +51,7 @@ class Employee(db.Model):
     DOB = db.Column(db.Date, nullable=False)
     active = db.Column(db.Boolean, nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey('Company.cId'),
-                           nullable=False)
+                           nullable=True)
 
     def __repr__(self):
         return "<Employee '{}'>".format(self.eId)

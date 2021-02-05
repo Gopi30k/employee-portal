@@ -140,6 +140,7 @@
 
     <p-dropdown
       [options]="listOfCompanies"
+      id="company"
       formControlName="company"
       optionLabel="name"
       [filter]="true"
@@ -153,13 +154,13 @@
         employeeFormControl.company.errors?.required
       "
     >
-      Designation is required
+      Company is required
     </span>
   </div>
   <div class="signup-btn">
     <button
       type="submit"
-      label="Sign Up"
+      label="Submit"
       class="ui-button-raised"
       pButton
     ></button>

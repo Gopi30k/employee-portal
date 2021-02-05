@@ -1,6 +1,6 @@
 from operator import add
 from app.main import db
-from app.main.model.effy_employee_portal import Company
+from app.main.model.effy_employee_portal import Company, Employee
 from geopy.geocoders import Nominatim
 from .address_service import create_address
 
@@ -68,3 +68,33 @@ def save_to_database(data):  # TODO : remove and make it a comman service method
         return True
     except Exception:
         return False
+
+
+def delete_company(companyId):
+    breakpoint()
+    try:
+        # change employees company id to null
+        employees = Employee.query.filter_by(company_id=companyId).all()
+        if(len(employees) > 0):
+            for employee in employees:
+                employee.company_id = None
+            db.session.commit()
+        company = Company.query.filter_by(cId=companyId)
+
+        if(bool(company.first())):
+            company.delete()
+            db.session.commit()
+            return {
+                'message': """Company deleted successfully"""
+            }, 204
+
+        else:
+            return {
+                'message': """Company not found"""
+            }, 404
+
+    except Exception as e:
+        print(e)
+        return {
+            'message': """Error when deleting company"""
+        }, 400

@@ -12,7 +12,8 @@ import { CompanyComponent } from "./company/company.component";
 import { EmployeeComponent } from "./employee/employee.component";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NewEmployeeComponent } from "./new-employee/new-employee.component";
-
+import { AgmCoreModule } from "@agm/core";
+import { NewCompanyComponent } from "./new-company/new-company.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { NewEmployeeComponent } from "./new-employee/new-employee.component";
     CompanyComponent,
     EmployeeComponent,
     NewEmployeeComponent,
+    NewCompanyComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,9 +33,12 @@ import { NewEmployeeComponent } from "./new-employee/new-employee.component";
     PrimengModule,
     HttpClientModule,
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyAVhKvWwUe6Z0r6JglH6cUzO0qObcKVqCI",
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [NewEmployeeComponent],
+  entryComponents: [NewEmployeeComponent, NewCompanyComponent],
 })
 export class AppModule {}

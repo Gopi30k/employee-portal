@@ -75,7 +75,7 @@ For more :
 
 ```bash
 from app.main import create_app, db
-from app.main.model import effy_employee_portal
+from app.main.model.effy_employee_portal import Employee,Company
 import datetime
 app = create_app('dev')
 app.app_context().push()

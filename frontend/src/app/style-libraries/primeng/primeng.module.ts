@@ -17,6 +17,7 @@ import { TabViewModule } from "primeng/tabview";
 import { TableModule } from "primeng/table";
 import { CalendarModule } from "primeng/calendar";
 import { DropdownModule } from "primeng/dropdown";
+import { GMapModule } from "primeng/gmap";
 
 export const primengComponents = [
   ButtonModule,
@@ -36,6 +37,7 @@ export const primengComponents = [
   TableModule,
   CalendarModule,
   DropdownModule,
+  GMapModule,
 ];
 
 @NgModule({

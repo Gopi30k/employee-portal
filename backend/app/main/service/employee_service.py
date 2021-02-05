@@ -40,3 +40,39 @@ def save_to_database(data):  # TODO : remove and make it a comman service method
         return True
     except Exception:
         return False
+
+
+def delete_employee(employeeId):
+    try:
+        employee = Employee.query.filter_by(eId=employeeId)
+
+        if(bool(employee.first())):
+            employee.delete()
+            db.session.commit()
+            return {
+                'message': """Employee deleted successfully"""
+            }, 204
+
+        else:
+            return {
+                'message': """Employee not found"""
+            }, 404
+
+    except Exception as e:
+        print(e)
+        return {
+            'message': """Error when deleting employee"""
+        }, 400
+
+
+def update_employee(employee):
+    Employee.query.filter_by(eId=employee['eId']).update(dict(firstName=employee['firstName'],
+                                                              lastName=employee['lastName'],
+                                                              email=employee['email'],
+                                                              designation=employee['designation'],
+                                                              DOB=employee['DOB'],
+                                                              active=employee['active'],
+                                                              company_id=employee['company']
+                                                              ))
+    db.session.commit()
+    return True
