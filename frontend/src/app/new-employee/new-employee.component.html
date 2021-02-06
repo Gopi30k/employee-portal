@@ -5,7 +5,7 @@
 >
   <div class="ui-fluid p-grid">
     <div class="p-field p-col-12 p-md-6">
-      <label for="firstname">FirstName</label>
+      <label for="firstname">FirstName<span class="required">*</span></label>
       <input
         id="firstname"
         type="text"
@@ -15,14 +15,17 @@
       />
       <span
         class="text-danger"
-        *ngIf="
+        [style.visibility]="
           (employeeFormControl.firstName.touched || submitted) &&
           employeeFormControl.firstName.errors?.required
+            ? 'visible'
+            : 'hidden'
         "
       >
         First Name is required
       </span>
     </div>
+
     <div class="p-field p-col-12 p-md-6">
       <label for="lastname">LastName</label>
       <input
@@ -32,18 +35,13 @@
         autocomplete="off"
         pInputText
       />
-      <span
-        class="text-danger"
-        *ngIf="
-          (employeeFormControl.lastName.touched || submitted) &&
-          employeeFormControl.lastName.errors?.required
-        "
-      >
-        Last Name is required
+      <span class="text-danger" [style.visibility]="'hidden'">
+        Last Name is Optional
       </span>
     </div>
+
     <div class="p-field p-col-12 p-md-12">
-      <label for="email">Email</label>
+      <label for="email">Email<span class="required">*</span></label>
       <input
         id="email"
         type="email"
@@ -55,24 +53,35 @@
       <span
         class="text-danger"
         *ngIf="
+          !(
+            employeeFormControl.email.touched &&
+            employeeFormControl.email.errors?.email
+          )
+        "
+        [style.visibility]="
           (employeeFormControl.email.touched || submitted) &&
           employeeFormControl.email.errors?.required
+            ? 'visible'
+            : 'hidden'
         "
       >
         Email is required
       </span>
-      <!-- <span
-      class="text-danger"
-      *ngIf="
-        employeeFormControl.email.touched &&
-        employeeFormControl.email.errors?.email
-      "
-    >
-      Enter a valid email address
-    </span> -->
+      <span
+        class="text-danger"
+        *ngIf="
+          employeeFormControl.email.touched &&
+          employeeFormControl.email.errors?.email
+        "
+      >
+        Enter a valid email address
+      </span>
     </div>
+
     <div class="p-field p-col-12 p-md-6">
-      <label for="designation">Designation</label>
+      <label for="designation"
+        >Designation<span class="required">*</span></label
+      >
       <input
         id="designation"
         type="text"
@@ -82,90 +91,85 @@
       />
       <span
         class="text-danger"
-        *ngIf="
+        [style.visibility]="
           (employeeFormControl.designation.touched || submitted) &&
           employeeFormControl.designation.errors?.required
+            ? 'visible'
+            : 'hidden'
         "
       >
         Designation is required
       </span>
     </div>
-  </div>
-  <div class="p-field p-col-12 p-md-6">
-    <label for="DOB">Date of Birth</label>
 
-    <p-calendar
-      id="DOB"
-      formControlName="DOB"
-      [yearNavigator]="true"
-      [monthNavigator]="true"
-      dateFormat="yy/mm/dd"
-      [yearRange]="yearString"
-      [showIcon]="true"
-      icon="pi pi-calendar"
-      placeholder="YYYY/MM/DD"
-      [appendTo]="'body'"
-    ></p-calendar>
-    <span
-      class="text-danger"
-      *ngIf="
-        (employeeFormControl.DOB.touched || submitted) &&
-        employeeFormControl.DOB.errors?.required
-      "
-    >
-      DOB is required
-    </span>
-  </div>
-  <div class="p-field p-col-12 p-md-6">
-    <label for="active">Active</label>
-    <!--
-    <p-checkbox
-      id="designation"
-      [formControl]="newEmployeeForm.controls['active']"
-    ></p-checkbox> -->
+    <div class="p-field p-col-12 p-md-6">
+      <label for="DOB">Date of Birth<span class="required">*</span></label>
 
-    <mat-checkbox formControlName="active"></mat-checkbox>
+      <p-calendar
+        id="DOB"
+        formControlName="DOB"
+        [yearNavigator]="true"
+        [monthNavigator]="true"
+        dateFormat="yy/mm/dd"
+        [yearRange]="yearString"
+        [showIcon]="true"
+        icon="pi pi-calendar"
+        placeholder="YYYY/MM/DD"
+        [appendTo]="'body'"
+      ></p-calendar>
+      <span
+        class="text-danger"
+        [style.visibility]="
+          (employeeFormControl.DOB.touched || submitted) &&
+          employeeFormControl.DOB.errors?.required
+            ? 'visible'
+            : 'hidden'
+        "
+      >
+        DOB is required
+      </span>
+    </div>
 
-    <!-- <span
-      class="text-danger"
-      *ngIf="
-        (employeeFormControl.designation.touched || submitted) &&
-        employeeFormControl.designation.errors?.required
-      "
-    >
-      Designation is required
-    </span> -->
-  </div>
-  <div class="p-field p-col-12 p-md-6" *ngIf="!isCompanydetailViewPage">
-    <label for="company">Company</label>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="active">Active</label><br />
+      <mat-checkbox formControlName="active"></mat-checkbox>
+      <span [style.visibility]="'hidden'">Active is optional</span>
+    </div>
 
-    <p-dropdown
-      [options]="listOfCompanies"
-      id="company"
-      formControlName="company"
-      optionLabel="name"
-      [filter]="true"
-      placeholder="Select a Company"
-    ></p-dropdown>
+    <div class="p-field p-col-12 p-md-6" *ngIf="!isCompanydetailViewPage">
+      <label for="company">Company<span class="required">*</span></label>
 
-    <span
-      class="text-danger"
-      *ngIf="
-        (employeeFormControl.company.touched || submitted) &&
-        employeeFormControl.company.errors?.required
-      "
-    >
-      Company is required
-    </span>
-  </div>
-  <div class="p-field p-col-12 p-md-6" *ngIf="isCompanydetailViewPage">
-    <label for="company">Company</label>
-    <input
-      type="text"
-      [value]="companyNamefromDetailViewPage"
-      disabled="true"
-      pInputText
-    />
+      <p-dropdown
+        [options]="listOfCompanies"
+        id="company"
+        formControlName="company"
+        optionLabel="name"
+        [filter]="true"
+        placeholder="Select a Company"
+      ></p-dropdown>
+
+      <span
+        class="text-danger"
+        [style.visibility]="
+          (employeeFormControl.company.touched || submitted) &&
+          employeeFormControl.company.errors?.required
+            ? 'visible'
+            : 'hidden'
+        "
+      >
+        Company is required
+      </span>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6" *ngIf="isCompanydetailViewPage">
+      <label for="company">Company</label>
+      <input
+        type="text"
+        [value]="companyNamefromDetailViewPage"
+        disabled="true"
+        pInputText
+      />
+    </div>
   </div>
   <div class="signup-btn">
     <button

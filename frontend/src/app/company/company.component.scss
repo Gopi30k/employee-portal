@@ -1,10 +1,16 @@
-agm-map {
-  height: 400px;
-  width: 600px;
-}
+#company-section {
+  .add-company {
+    margin-bottom: 16px;
+  }
 
-.fa-map-marker {
-  color: #34a835;
-  font-size: 20px;
-  cursor: pointer;
+  agm-map {
+    height: 400px;
+    width: 600px;
+  }
+
+  .fa-map-marker {
+    color: #34a835;
+    font-size: 20px;
+    cursor: pointer;
+  }
 }

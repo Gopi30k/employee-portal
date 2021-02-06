@@ -4,9 +4,9 @@
     [formGroup]="newCompanyForm"
     (ngSubmit)="addNewCompany()"
   >
-    <div class="ui-fluid p-grid">
-      <div class="p-field p-col-12 p-md-6">
-        <label for="name">Name</label>
+    <div class="ui-fluid p-field p-grid p-col-12">
+      <label for="name">Name<span class="required">*</span></label>
+      <div class="p-col-12 p-md-6">
         <input
           id="name"
           type="text"
@@ -14,17 +14,316 @@
           autocomplete="off"
           pInputText
         />
-        <span
-          class="text-danger"
-          *ngIf="
-            (companyFormControl.name.touched || submitted) &&
-            companyFormControl.name.errors?.required
+      </div>
+
+      <div
+        class="text-danger p-col-12 p-md-3"
+        [style.visibility]="
+          (companyFormControl.name.touched || submitted) &&
+          companyFormControl.name.errors?.required
+            ? 'visible'
+            : 'hidden'
+        "
+      >
+        Company Name is required
+      </div>
+    </div>
+    <div class="p-grid" formGroupName="address">
+      <div class="p-col-12">
+        <h3>Address</h3>
+      </div>
+
+      <div class="ui-fluid p-field p-grid p-col-11 p-offset-1">
+        <label for="doorNo">Door No</label>
+        <div class="p-col-12 p-md-6">
+          <input
+            type="text"
+            id="doorNo"
+            formControlName="doorNo"
+            autocomplete="off"
+            pInputText
+          />
+        </div>
+
+        <div class="text-danger p-col-12 p-md-3" [style.visibility]="'hidden'">
+          DoorNo
+        </div>
+      </div>
+
+      <div class="ui-fluid p-field p-grid p-col-11 p-offset-1">
+        <label for="streetName"
+          >Street Name<span class="required">*</span></label
+        >
+        <div class="p-col-12 p-md-6">
+          <input
+            type="text"
+            id="streetName"
+            formControlName="streetName"
+            autocomplete="off"
+            pInputText
+          />
+        </div>
+
+        <div
+          class="text-danger p-col-12 p-md-3"
+          [style.visibility]="
+            (companyFormControl.address.controls.streetName.touched ||
+              submitted) &&
+            companyFormControl.address.controls.streetName.errors?.required
+              ? 'visible'
+              : 'hidden'
           "
         >
-          Company Name is required
-        </span>
+          Street Name is required
+        </div>
       </div>
-      <div class="p-field p-col-12 p-md-6">
+
+      <div class="ui-fluid p-field p-grid p-col-11 p-offset-1">
+        <label for="city">City<span class="required">*</span></label>
+        <div class="p-col-12 p-md-6">
+          <input
+            type="text"
+            id="city"
+            formControlName="city"
+            autocomplete="off"
+            pInputText
+          />
+        </div>
+
+        <div
+          class="text-danger p-col-12 p-md-3"
+          [style.visibility]="
+            (companyFormControl.address.controls.city.touched || submitted) &&
+            companyFormControl.address.controls.city.errors?.required
+              ? 'visible'
+              : 'hidden'
+          "
+        >
+          City is required
+        </div>
+      </div>
+
+      <div class="ui-fluid p-field p-grid p-col-11 p-offset-1">
+        <label for="state">State<span class="required">*</span></label>
+
+        <div class="p-col-12 p-md-6">
+          <input
+            type="text"
+            id="state"
+            formControlName="state"
+            autocomplete="off"
+            pInputText
+          />
+        </div>
+
+        <div
+          class="text-danger p-col-12 p-md-3"
+          [style.visibility]="
+            (companyFormControl.address.controls.state.touched || submitted) &&
+            companyFormControl.address.controls.state.errors?.required
+              ? 'visible'
+              : 'hidden'
+          "
+        >
+          State is required
+        </div>
+      </div>
+
+      <div class="ui-fluid p-field p-grid p-col-11 p-offset-1">
+        <label for="country">Country<span class="required">*</span></label>
+        <div class="p-col-12 p-md-6">
+          <input
+            type="text"
+            id="country"
+            formControlName="country"
+            autocomplete="off"
+            pInputText
+          />
+        </div>
+
+        <div
+          class="text-danger p-col-12 p-md-3"
+          [style.visibility]="
+            (companyFormControl.address.controls.country.touched ||
+              submitted) &&
+            companyFormControl.address.controls.country.errors?.required
+              ? 'visible'
+              : 'hidden'
+          "
+        >
+          Country is required
+        </div>
+      </div>
+
+      <div class="ui-fluid p-field p-grid p-col-11 p-offset-1">
+        <label for="pincode">Pincode<span class="required">*</span></label>
+
+        <div class="p-col-12 p-md-6">
+          <input
+            type="text"
+            id="pincode"
+            formControlName="pincode"
+            autocomplete="off"
+            pInputText
+          />
+        </div>
+
+        <div
+          class="text-danger p-col-12 p-md-3"
+          [style.visibility]="
+            (companyFormControl.address.controls.pincode.touched ||
+              submitted) &&
+            companyFormControl.address.controls.pincode.errors?.required
+              ? 'visible'
+              : 'hidden'
+          "
+        >
+          Pincode is required
+        </div>
+      </div>
+
+      <!-- <div formGroupName="address" class="p-grid ui-fluid p-col-12">
+        <div class="p-field p-col-12 p-md-4">
+          <label for="doorNo">Door No</label>
+          <div class="p-col-12 p-md-6">
+            <input
+              type="text"
+              id="doorNo"
+              formControlName="doorNo"
+              autocomplete="off"
+              pInputText
+            />
+          </div>
+          <div
+            class="text-danger p-col-12 p-md-3"
+            [style.visibility]="'hidden'"
+          >
+            DoorNo
+          </div>
+        </div>
+
+        <div class="p-grid p-field p-col-12">
+          <div class="p-col-12 p-md-4">
+            <label for="streetName"
+              >Street Name<span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="streetName"
+              formControlName="streetName"
+              autocomplete="off"
+              pInputText
+            />
+          </div>
+          <div
+            class="p-col-12 p-md-3 text-danger"
+            [style.visibility]="
+              (companyFormControl.address.controls.streetName.touched ||
+                submitted) &&
+              companyFormControl.address.controls.streetName.errors?.required
+                ? 'visible'
+                : 'hidden'
+            "
+          >
+            Street Name is required
+          </div>
+        </div> -->
+
+      <!-- <div class="p-field p-col-12 p-md-4">
+            <label for="city">City<span class="required">*</span></label>
+            <input
+              type="text"
+              id="city"
+              formControlName="city"
+              autocomplete="off"
+              pInputText
+            />
+            <div
+              class="text-danger"
+              [style.visibility]="
+                (companyFormControl.address.controls.city.touched ||
+                  submitted) &&
+                companyFormControl.address.controls.city.errors?.required
+                  ? 'visible'
+                  : 'hidden'
+              "
+            >
+              City is required
+            </div>
+          </div>
+
+          <div class="p-field p-col-12 p-md-4">
+            <label for="state">State<span class="required">*</span></label>
+            <input
+              type="text"
+              id="state"
+              formControlName="state"
+              autocomplete="off"
+              pInputText
+            />
+            <div
+              class="text-danger"
+              [style.visibility]="
+                (companyFormControl.address.controls.state.touched ||
+                  submitted) &&
+                companyFormControl.address.controls.state.errors?.required
+                  ? 'visible'
+                  : 'hidden'
+              "
+            >
+              State is required
+            </div>
+          </div>
+
+          <div class="p-field p-col-12 p-md-4">
+            ----<label for="country">Country<span class="required">*</span></label>
+            <input
+              type="text"
+              id="country"
+              formControlName="country"
+              autocomplete="off"
+              pInputText
+            />
+            <span
+              class="text-danger"
+              [style.visibility]="
+                (companyFormControl.address.controls.country.touched ||
+                  submitted) &&
+                companyFormControl.address.controls.country.errors?.required
+                  ? 'visible'
+                  : 'hidden'
+              "
+            >
+              Country is required
+            </span>
+          </div>
+
+          <div class="p-field p-col-12 p-md-4">
+            <label for="pincode">Pincode<span class="required">*</span></label>
+            <input
+              type="text"
+              id="pincode"
+              formControlName="pincode"
+              autocomplete="off"
+              pInputText
+            />
+            <span
+              class="text-danger"
+              [style.visibility]="
+                (companyFormControl.address.controls.pincode.touched ||
+                  submitted) &&
+                companyFormControl.address.controls.pincode.errors?.required
+                  ? 'visible'
+                  : 'hidden'
+              "
+            >
+              Pincode is required
+            </span>
+          </div> -->
+    </div>
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- <div class="ui-fluid p-formgrid p-grid">
         <div formGroupName="address">
           <h4>Address</h4>
 
@@ -60,92 +359,13 @@
             </span>
           </div>
 
-          <div class="p-field p-col-6 p-md-6">
-            <label for="city">City:</label>
-            <input
-              type="text"
-              id="city"
-              formControlName="city"
-              autocomplete="off"
-              pInputText
-            />
-            <span
-              class="text-danger"
-              *ngIf="
-                (companyFormControl.address.controls.city.touched ||
-                  submitted) &&
-                companyFormControl.address.controls.city.errors?.required
-              "
-            >
-              City is required
-            </span>
-          </div>
 
-          <div class="p-field p-col-6 p-md-6">
-            <label for="state">State:</label>
-            <input
-              type="text"
-              id="state"
-              formControlName="state"
-              autocomplete="off"
-              pInputText
-            />
-            <span
-              class="text-danger"
-              *ngIf="
-                (companyFormControl.address.controls.state.touched ||
-                  submitted) &&
-                companyFormControl.address.controls.state.errors?.required
-              "
-            >
-              State is required
-            </span>
-          </div>
 
-          <div class="p-field p-col-6 p-md-6">
-            <label for="country">Country:</label>
-            <input
-              type="text"
-              id="country"
-              formControlName="country"
-              autocomplete="off"
-              pInputText
-            />
-            <span
-              class="text-danger"
-              *ngIf="
-                (companyFormControl.address.controls.country.touched ||
-                  submitted) &&
-                companyFormControl.address.controls.country.errors?.required
-              "
-            >
-              Country is required
-            </span>
-          </div>
 
-          <div class="p-field p-col-6 p-md-6">
-            <label for="pincode">Pincode:</label>
-            <input
-              type="text"
-              id="pincode"
-              formControlName="pincode"
-              autocomplete="off"
-              pInputText
-            />
-            <span
-              class="text-danger"
-              *ngIf="
-                (companyFormControl.address.controls.pincode.touched ||
-                  submitted) &&
-                companyFormControl.address.controls.pincode.errors?.required
-              "
-            >
-              pincode is required
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+
+       </div>
+       </div> -->
+    <!-- </div> -->
 
     <div class="signup-btn">
       <button

@@ -42,8 +42,8 @@ export class NewEmployeeComponent implements OnInit {
     // *FormBuilder - creates the Employee Form
     this.newEmployeeForm = this.fb.group({
       firstName: ["", Validators.required],
-      lastName: ["", Validators.required],
-      email: ["", Validators.email],
+      lastName: [""],
+      email: ["", [Validators.required, Validators.email]],
       designation: ["", Validators.required],
       DOB: ["", Validators.required],
       active: [true],
