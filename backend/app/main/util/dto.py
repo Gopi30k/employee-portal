@@ -26,7 +26,7 @@ class CompanyDTO:
         'address': fields.Nested(api.model('address',
                                            {
                                                'aId': fields.Integer(required=False, description='Id of Address'),
-                                               'doorNo': fields.String(required=True),
+                                               'doorNo': fields.String(required=False),
                                                'streetName': fields.String(required=False),
                                                'city': fields.String(required=True),
                                                'state': fields.String(required=True),
@@ -37,12 +37,28 @@ class CompanyDTO:
         'longitude': fields.String(required=False, description='Longitude of company location')
     })
 
+    update_company = api.model('update_company', {
+        'cId': fields.Integer(required=True, description='Id of the company'),
+        'name': fields.String(required=True, description='Name of the Company'),
+        'address': fields.Nested(api.model('address',
+                                           {
+                                               'aId': fields.Integer(required=False, description='Id of Address'),
+                                               'doorNo': fields.String(required=False),
+                                               'streetName': fields.String(required=False),
+                                               'city': fields.String(required=True),
+                                               'state': fields.String(required=True),
+                                               'country': fields.String(required=True),
+                                               'pincode': fields.String(required=True),
+                                           }), required=True),
+        'latitude': fields.String(required=False, description='Latitude of company location'),
+        'longitude': fields.String(required=False, description='Longitude of company location')
+    })
     company = api.model('company', {
         'cId': fields.Integer(required=True, description='Id of the company'),
         'name': fields.String(required=True, description='Name of the Company'),
         'address': fields.Nested(api.model('address',
                                            {
-                                               'doorNo': fields.String(required=True),
+                                               'doorNo': fields.String(required=False),
                                                'streetName': fields.String(required=False),
                                                'city': fields.String(required=True),
                                                'state': fields.String(required=True),
@@ -83,7 +99,7 @@ class EmployeeDTO:
                                                                                  'name': fields.String(required=True, description='Name of the Company'),
                                                                                  'address': fields.List(fields.Nested(api.model('address',
                                                                                                                                 {'aId': fields.Integer(required=False, description='Id of Address'),
-                                                                                                                                 'doorNo': fields.String(required=True),
+                                                                                                                                 'doorNo': fields.String(required=False),
                                                                                                                                  'streetName': fields.String(required=False),
                                                                                                                                  'city': fields.String(required=True),
                                                                                                                                  'state': fields.String(required=True),

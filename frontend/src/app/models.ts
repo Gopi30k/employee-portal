@@ -31,3 +31,8 @@ export interface Column {
   field: string;
   header: string;
 }
+
+export interface companyDropDownList {
+  cId: number;
+  name: string;
+}

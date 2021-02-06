@@ -22,7 +22,8 @@
 <p-table
   [value]="employees | async"
   [paginator]="true"
-  [rows]="5"
+  [rows]="10"
+  [autoLayout]="true"
   [(contextMenuSelection)]="rowSelected"
   [contextMenu]="cm"
 >
@@ -42,7 +43,7 @@
       <td>{{ employee?.email }}</td>
       <td>{{ employee?.designation }}</td>
       <td>{{ employee?.DOB }}</td>
-      <td>{{ employee?.active }}</td>
+      <td>{{ employee?.active ? "Active" : "Inactive" }}</td>
       <td>{{ employee?.company ? employee.company[0].name : "-" }}</td>
     </tr>
   </ng-template>

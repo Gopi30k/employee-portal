@@ -55,7 +55,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   show() {
     this.ref = this.dialogService.open(NewEmployeeComponent, {
       header: "Add New Employee",
-      width: "60%",
+      width: "70%",
     });
   }
 
@@ -64,7 +64,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.ref = this.dialogService.open(NewEmployeeComponent, {
       data: employee,
       header: "Add New Employee",
-      width: "60%",
+      width: "70%",
     });
   }
 
@@ -88,6 +88,8 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ref.close();
+    if (this.ref !== undefined) {
+      this.ref.close();
+    }
   }
 }

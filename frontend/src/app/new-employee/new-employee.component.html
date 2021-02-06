@@ -104,6 +104,7 @@
       [showIcon]="true"
       icon="pi pi-calendar"
       placeholder="YYYY/MM/DD"
+      [appendTo]="'body'"
     ></p-calendar>
     <span
       class="text-danger"
@@ -135,7 +136,7 @@
       Designation is required
     </span> -->
   </div>
-  <div class="p-field p-col-12 p-md-6">
+  <div class="p-field p-col-12 p-md-6" *ngIf="!isCompanydetailViewPage">
     <label for="company">Company</label>
 
     <p-dropdown
@@ -156,6 +157,15 @@
     >
       Company is required
     </span>
+  </div>
+  <div class="p-field p-col-12 p-md-6" *ngIf="isCompanydetailViewPage">
+    <label for="company">Company</label>
+    <input
+      type="text"
+      [value]="companyNamefromDetailViewPage"
+      disabled="true"
+      pInputText
+    />
   </div>
   <div class="signup-btn">
     <button

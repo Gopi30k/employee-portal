@@ -1,3 +1,12 @@
-<main>
-  <router-outlet></router-outlet>
-</main>
+<div id="eportal">
+  <nav>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <a [routerLink]="'[/]'"> <h1>Employee Portal</h1></a>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </nav>
+  <main>
+    <app-employee-portal></app-employee-portal>
+  </main>
+</div>

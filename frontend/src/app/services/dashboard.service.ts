@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, Subject, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, filter, map, tap } from "rxjs/operators";
 import { Employee, Address, Company } from "../models";
 @Injectable({
   providedIn: "root",
@@ -12,6 +12,9 @@ export class DashboardService {
 
   private companyTableData: Subject<any> = new Subject<any>();
   companyTableData$: Observable<any> = this.companyTableData.asObservable();
+
+  private employeesOfCompany: Subject<any> = new Subject<any>();
+  employeesOfCompany$: Observable<any> = this.employeesOfCompany.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -32,7 +35,7 @@ export class DashboardService {
 
   getAllCompanies() {
     return this.http
-      .get<Company>("http://127.0.0.1:5000/company/")
+      .get<Company[]>("http://127.0.0.1:5000/company/")
       .pipe(catchError(this.handleError));
   }
 
@@ -79,6 +82,21 @@ export class DashboardService {
     `
       )
       .pipe(catchError(this.handleError));
+  }
+
+  updateCompany(company) {
+    return this.http
+      .put("http://127.0.0.1:5000/company/", company)
+      .pipe(catchError(this.handleError));
+  }
+
+  getEmployeesofCompany(companyId: number) {
+    return this.http
+      .get<Employee[]>(`http://127.0.0.1:5000/company/${companyId}`)
+      .pipe(catchError(this.handleError))
+      .subscribe((data) => {
+        this.employeesOfCompany.next(data);
+      });
   }
 
   private handleError(error: HttpErrorResponse) {

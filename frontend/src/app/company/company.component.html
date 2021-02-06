@@ -7,13 +7,15 @@
   class="ui-button-raised"
   (click)="show()"
 ></button>
+<!-- <fa name="cog" animation="spin"></fa> -->
 
 <p-table
   [value]="companies | async"
   [paginator]="true"
-  [rows]="5"
+  [rows]="10"
   [(contextMenuSelection)]="rowSelected"
   [contextMenu]="cm"
+  [autoLayout]="true"
 >
   <ng-template pTemplate="header">
     <tr>
@@ -24,7 +26,11 @@
   </ng-template>
   <ng-template pTemplate="body" let-company>
     <tr [pContextMenuRow]="company">
-      <td>{{ company.name }}</td>
+      <td>
+        <a [routerLink]="['detail', company.cId]" [state]="{ data: company }">{{
+          company.name
+        }}</a>
+      </td>
       <td>
         {{
           company.address[0].doorNo +
@@ -40,8 +46,13 @@
             company.address[0].country
         }}
       </td>
-      <td>
-        <button pButton label="view" (click)="showmap(company)"></button>
+      <td align="center">
+        <!-- <button pButton label="view" (click)="showmap(company)"></button> -->
+        <i
+          class="fa fa-map-marker"
+          aria-hidden="true"
+          (click)="showmap(company)"
+        ></i>
       </td>
     </tr>
   </ng-template>
@@ -49,7 +60,13 @@
 
 <p-contextMenu #cm [model]="rowActions"></p-contextMenu>
 
-<p-dialog header="Location" [(visible)]="displayMapModal">
+<p-dialog
+  header="Location"
+  [(visible)]="displayMapModal"
+  [resizable]="false"
+  [modal]="true"
+  [draggable]="false"
+>
   <agm-map [latitude]="latitude" [longitude]="longitude">
     <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
   </agm-map>

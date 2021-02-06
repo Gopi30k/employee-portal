@@ -23,7 +23,7 @@ export class NewCompanyComponent implements OnInit {
     this.newCompanyForm = this.fb.group({
       name: ["", Validators.required],
       address: this.fb.group({
-        doorNo: ["", Validators.required],
+        doorNo: [""],
         streetName: ["", Validators.required],
         city: ["", Validators.required],
         state: ["", Validators.required],
@@ -71,7 +71,17 @@ export class NewCompanyComponent implements OnInit {
           }
         );
       } else {
-        // this.dashboardService.updateCompany()
+        companyData.cId = this.config.data.cId;
+        console.log(companyData);
+
+        this.dashboardService.updateCompany(companyData).subscribe(
+          (data) => {
+            this.dashboardService.getAllCompaniesObs();
+          },
+          (err) => {
+            console.error(err);
+          }
+        );
       }
       this.ref.close();
     }

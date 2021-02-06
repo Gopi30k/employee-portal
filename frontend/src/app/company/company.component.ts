@@ -45,18 +45,18 @@ export class CompanyComponent implements OnInit, OnDestroy {
 
   show() {
     this.ref = this.dialogService.open(NewCompanyComponent, {
-      header: "Add New Employee",
+      header: "Add New Company",
       width: "60%",
     });
   }
 
   updateCompanyRow(company: Company) {
     console.log(company);
-    // this.ref = this.dialogService.open(NewCompanyComponent, {
-    //   data: employee,
-    //   header: "Add New Employee",
-    //   width: "60%",
-    // });
+    this.ref = this.dialogService.open(NewCompanyComponent, {
+      data: company,
+      header: "Add New Company",
+      width: "60%",
+    });
   }
 
   deleteCompanyRow(company: Company) {
@@ -65,6 +65,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
       .deleteCompany(+company.cId)
       .subscribe((response: Response) => {
         this.dashboardService.getAllCompaniesObs();
+        this.dashboardService.getAllEmployeesObs();
       });
     // let index = -1;
     // for (let i = 0; i < this.cars.length; i++) {
@@ -84,6 +85,8 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.longitude = +company.longitude;
   }
   ngOnDestroy() {
-    this.ref.close();
+    if (this.ref !== undefined) {
+      this.ref.close();
+    }
   }
 }

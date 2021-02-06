@@ -1,166 +1,159 @@
-<form
-  id="employee-form"
-  [formGroup]="newCompanyForm"
-  (ngSubmit)="addNewCompany()"
->
-  <div class="ui-fluid p-grid">
-    <div class="p-field p-col-12 p-md-6">
-      <label for="name">Name</label>
-      <input
-        id="name"
-        type="text"
-        formControlName="name"
-        autocomplete="off"
-        pInputText
-      />
-      <span
-        class="text-danger"
-        *ngIf="
-          (companyFormControl.name.touched || submitted) &&
-          companyFormControl.name.errors?.required
-        "
-      >
-        Company Name is required
-      </span>
-    </div>
-    <div class="p-field p-col-12 p-md-6">
-      <div formGroupName="address">
-        <h4>Address</h4>
+<div id="new-company">
+  <form
+    id="company-form"
+    [formGroup]="newCompanyForm"
+    (ngSubmit)="addNewCompany()"
+  >
+    <div class="ui-fluid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          autocomplete="off"
+          pInputText
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (companyFormControl.name.touched || submitted) &&
+            companyFormControl.name.errors?.required
+          "
+        >
+          Company Name is required
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <div formGroupName="address">
+          <h4>Address</h4>
 
-        <div class="p-field p-col-6 p-md-6">
-          <label for="doorNo">Door No:</label>
-          <input
-            type="text"
-            id="doorNo"
-            formControlName="doorNo"
-            autocomplete="off"
-            pInputText
-          />
-          <span
-            class="text-danger"
-            *ngIf="
-              (companyFormControl.address.controls.doorNo.touched ||
-                submitted) &&
-              companyFormControl.address.controls.doorNo.errors?.required
-            "
-          >
-            Door No. is required
-          </span>
-        </div>
+          <div class="p-field p-col-6 p-md-6">
+            <label for="doorNo">Door No:</label>
+            <input
+              type="text"
+              id="doorNo"
+              formControlName="doorNo"
+              autocomplete="off"
+              pInputText
+            />
+          </div>
 
-        <div class="p-field p-col-6 p-md-6">
-          <label for="streetName">Street Name:</label>
-          <input
-            type="text"
-            id="streetName"
-            formControlName="streetName"
-            autocomplete="off"
-            pInputText
-          />
-          <span
-            class="text-danger"
-            *ngIf="
-              (companyFormControl.address.controls.streetName.touched ||
-                submitted) &&
-              companyFormControl.address.controls.streetName.errors?.required
-            "
-          >
-            Street Name is required
-          </span>
-        </div>
+          <div class="p-field p-col-6 p-md-6">
+            <label for="streetName">Street Name:</label>
+            <input
+              type="text"
+              id="streetName"
+              formControlName="streetName"
+              autocomplete="off"
+              pInputText
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                (companyFormControl.address.controls.streetName.touched ||
+                  submitted) &&
+                companyFormControl.address.controls.streetName.errors?.required
+              "
+            >
+              Street Name is required
+            </span>
+          </div>
 
-        <div class="p-field p-col-6 p-md-6">
-          <label for="city">City:</label>
-          <input
-            type="text"
-            id="city"
-            formControlName="city"
-            autocomplete="off"
-            pInputText
-          />
-          <span
-            class="text-danger"
-            *ngIf="
-              (companyFormControl.address.controls.city.touched || submitted) &&
-              companyFormControl.address.controls.city.errors?.required
-            "
-          >
-            City is required
-          </span>
-        </div>
+          <div class="p-field p-col-6 p-md-6">
+            <label for="city">City:</label>
+            <input
+              type="text"
+              id="city"
+              formControlName="city"
+              autocomplete="off"
+              pInputText
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                (companyFormControl.address.controls.city.touched ||
+                  submitted) &&
+                companyFormControl.address.controls.city.errors?.required
+              "
+            >
+              City is required
+            </span>
+          </div>
 
-        <div class="p-field p-col-6 p-md-6">
-          <label for="state">State:</label>
-          <input
-            type="text"
-            id="state"
-            formControlName="state"
-            autocomplete="off"
-            pInputText
-          />
-          <span
-            class="text-danger"
-            *ngIf="
-              (companyFormControl.address.controls.state.touched ||
-                submitted) &&
-              companyFormControl.address.controls.state.errors?.required
-            "
-          >
-            State is required
-          </span>
-        </div>
+          <div class="p-field p-col-6 p-md-6">
+            <label for="state">State:</label>
+            <input
+              type="text"
+              id="state"
+              formControlName="state"
+              autocomplete="off"
+              pInputText
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                (companyFormControl.address.controls.state.touched ||
+                  submitted) &&
+                companyFormControl.address.controls.state.errors?.required
+              "
+            >
+              State is required
+            </span>
+          </div>
 
-        <div class="p-field p-col-6 p-md-6">
-          <label for="country">Country:</label>
-          <input
-            type="text"
-            id="country"
-            formControlName="country"
-            autocomplete="off"
-            pInputText
-          />
-          <span
-            class="text-danger"
-            *ngIf="
-              (companyFormControl.address.controls.country.touched ||
-                submitted) &&
-              companyFormControl.address.controls.country.errors?.required
-            "
-          >
-            Country is required
-          </span>
-        </div>
+          <div class="p-field p-col-6 p-md-6">
+            <label for="country">Country:</label>
+            <input
+              type="text"
+              id="country"
+              formControlName="country"
+              autocomplete="off"
+              pInputText
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                (companyFormControl.address.controls.country.touched ||
+                  submitted) &&
+                companyFormControl.address.controls.country.errors?.required
+              "
+            >
+              Country is required
+            </span>
+          </div>
 
-        <div class="p-field p-col-6 p-md-6">
-          <label for="pincode">Pincode:</label>
-          <input
-            type="text"
-            id="pincode"
-            formControlName="pincode"
-            autocomplete="off"
-            pInputText
-          />
-          <span
-            class="text-danger"
-            *ngIf="
-              (companyFormControl.address.controls.pincode.touched ||
-                submitted) &&
-              companyFormControl.address.controls.pincode.errors?.required
-            "
-          >
-            pincode is required
-          </span>
+          <div class="p-field p-col-6 p-md-6">
+            <label for="pincode">Pincode:</label>
+            <input
+              type="text"
+              id="pincode"
+              formControlName="pincode"
+              autocomplete="off"
+              pInputText
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                (companyFormControl.address.controls.pincode.touched ||
+                  submitted) &&
+                companyFormControl.address.controls.pincode.errors?.required
+              "
+            >
+              pincode is required
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="signup-btn">
-    <button
-      type="submit"
-      label="Submit"
-      class="ui-button-raised"
-      pButton
-    ></button>
-  </div>
-</form>
+    <div class="signup-btn">
+      <button
+        type="submit"
+        label="Submit"
+        class="ui-button-raised"
+        pButton
+      ></button>
+    </div>
+  </form>
+</div>

@@ -6,7 +6,7 @@ import {
   FormControl,
 } from "@angular/forms";
 import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
-import { Company } from "../models";
+import { Company, companyDropDownList } from "../models";
 import { DashboardService } from "../services/dashboard.service";
 
 @Component({
@@ -18,8 +18,10 @@ export class NewEmployeeComponent implements OnInit {
   newEmployeeForm: FormGroup;
   submitted: boolean = false;
   yearString: string;
-  listOfCompanies: Company;
+  listOfCompanies: companyDropDownList[];
   toUdpate: boolean = false;
+  isCompanydetailViewPage: boolean = false;
+  companyNamefromDetailViewPage: string;
   constructor(
     private fb: FormBuilder,
     private dashboardService: DashboardService,
@@ -28,11 +30,16 @@ export class NewEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.dashboardService.getAllCompaniesObs();
+    // *Get List of companies for company dropdown
     this.dashboardService.getAllCompanies().subscribe((data) => {
-      this.listOfCompanies = data;
+      this.listOfCompanies = [];
+      data.forEach((element) => {
+        // *Pushing only CId and Name of company into the list
+        this.listOfCompanies.push({ cId: element.cId, name: element.name });
+      });
     });
 
+    // *FormBuilder - creates the Employee Form
     this.newEmployeeForm = this.fb.group({
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
@@ -43,21 +50,38 @@ export class NewEmployeeComponent implements OnInit {
       company: ["", Validators.required],
     });
 
-    if ("data" in this.config) {
-      this.toUdpate = true;
-      let oldData = this.config.data;
-      // console.log(oldData["company"][0]["name"]);
+    // *Check for update view selected or company Details view selected
 
-      this.newEmployeeForm.patchValue({
-        firstName: oldData["firstName"],
-        lastName: oldData["lastName"],
-        email: oldData["email"],
-        designation: oldData["designation"],
-        // DOB: new Date(oldData["DOB"]).toString(),
-        active: oldData["active"],
-        // company: new FormControl(oldData["company"][0]["name"]),
-      });
+    if ("data" in this.config) {
+      // *Data to prepopulate the form
+      let predefinedConfigData = this.config.data;
+
+      // *checking if data is coming from Company Detail Page or update Context Menu
+      if ("companyDetailViewData" in predefinedConfigData) {
+        this.isCompanydetailViewPage = true;
+        // console.log(predefinedConfigData);
+        // *removing company field to make the field as disabled
+        this.newEmployeeForm.removeControl("company");
+        this.companyNamefromDetailViewPage =
+          predefinedConfigData.companyDetailViewData.name;
+      } else {
+        this.toUdpate = true;
+        // *PrePopulate Employee Form with old Data on Update Context Menu
+        this.newEmployeeForm.patchValue({
+          firstName: predefinedConfigData["firstName"],
+          lastName: predefinedConfigData["lastName"],
+          email: predefinedConfigData["email"],
+          designation: predefinedConfigData["designation"],
+          DOB: new Date(predefinedConfigData["DOB"]),
+          active: predefinedConfigData["active"],
+          company: {
+            cId: predefinedConfigData["company"][0]["cId"],
+            name: predefinedConfigData["company"][0]["name"],
+          },
+        });
+      }
     }
+    // console.log(this.newEmployeeForm);
 
     this.yearString = `1900:${new Date().getFullYear()}`;
   }
@@ -66,6 +90,7 @@ export class NewEmployeeComponent implements OnInit {
     return this.newEmployeeForm.controls;
   }
 
+  // *Convert Date to YYYY/MM/DD to pass to API
   convertTo_YYYY_MM_DD(date: string): string {
     const fDate = new Date(date);
     return `${fDate.getFullYear()}-${fDate.getMonth() + 1}-${fDate.getDate()}`;
@@ -73,17 +98,27 @@ export class NewEmployeeComponent implements OnInit {
 
   addNewEmployee() {
     this.submitted = true;
-    console.log(this.newEmployeeForm);
+    // console.log(this.newEmployeeForm);
 
     if (this.newEmployeeForm.valid) {
       let employeeData = this.newEmployeeForm.value;
+
+      // *Add Company data to employee Form data for detail view Page since its been removed before
+      if (this.isCompanydetailViewPage) {
+        employeeData.company = this.config.data.companyDetailViewData;
+      }
+      // console.log(employeeData);
       employeeData.DOB = this.convertTo_YYYY_MM_DD(employeeData.DOB);
       if (!this.toUdpate) {
         employeeData.company = employeeData.company.cId;
         this.dashboardService.addNewEmployee(employeeData).subscribe(
           (data) => {
-            console.log(data);
-            this.dashboardService.getAllEmployeesObs();
+            // * API call to refresh data on new record Addition
+            this.isCompanydetailViewPage
+              ? this.dashboardService.getEmployeesofCompany(
+                  this.config.data.companyDetailViewData.cId
+                )
+              : this.dashboardService.getAllEmployeesObs();
           },
           (err) => {
             console.error(err);
@@ -92,11 +127,10 @@ export class NewEmployeeComponent implements OnInit {
       } else {
         employeeData.eId = this.config.data.eId;
         employeeData.company = employeeData.company.cId;
-        console.log(employeeData);
 
+        // * API call to refresh data on update record
         this.dashboardService.updateEmployee(employeeData).subscribe(
           (data) => {
-            console.log(data);
             this.dashboardService.getAllEmployeesObs();
           },
           (err) => {

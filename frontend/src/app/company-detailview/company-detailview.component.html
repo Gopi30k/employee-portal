@@ -1,0 +1,86 @@
+<p-panel>
+  <p-header>
+    <h1>{{ companyData?.name }}</h1>
+    <h4>
+      {{
+        companyData.address[0].doorNo +
+          " " +
+          companyData.address[0].streetName +
+          " " +
+          companyData.address[0].city +
+          " " +
+          companyData.address[0].pincode +
+          " " +
+          companyData.address[0].state +
+          " " +
+          companyData.address[0].country
+      }}
+    </h4>
+    <a (click)="displayMapModal = !displayMapModal">View Location</a>
+    <br />
+    <button
+      pButton
+      label="Add Employee"
+      type="button"
+      icon="pi pi-plus"
+      iconPos="left"
+      class="ui-button-raised"
+      (click)="show()"
+    ></button>
+  </p-header>
+  <div class="employee-details">
+    <p-table
+      [value]="employeesOfCompany | async"
+      [paginator]="true"
+      [rows]="10"
+      [autoLayout]="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Designation</th>
+          <th>Date of Birth</th>
+          <th>Status</th>
+          <th colspan="2">Company</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-employee>
+        <tr>
+          <td>{{ employee.firstName + " " + employee.lastName }}</td>
+          <td>{{ employee?.email }}</td>
+          <td>{{ employee?.designation }}</td>
+          <td>{{ employee?.DOB }}</td>
+          <td>{{ employee?.active ? "Active" : "Inactive" }}</td>
+          <td>{{ employee?.company ? employee.company[0].name : "-" }}</td>
+          <td>
+            <button
+              label="Delete"
+              class="ui-button-raised ui-button-danger"
+              (click)="onEmployeeDelete(employee?.eId)"
+              pButton
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-panel>
+
+<p-dialog
+  header="Location"
+  [(visible)]="displayMapModal"
+  [resizable]="false"
+  [modal]="true"
+  [draggable]="false"
+>
+  <agm-map
+    [latitude]="+companyData.latitude"
+    [longitude]="+companyData.longitude"
+  >
+    <agm-marker
+      [latitude]="+companyData.latitude"
+      [longitude]="+companyData.longitude"
+    ></agm-marker>
+  </agm-map>
+</p-dialog>

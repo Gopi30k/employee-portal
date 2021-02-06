@@ -14,6 +14,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NewEmployeeComponent } from "./new-employee/new-employee.component";
 import { AgmCoreModule } from "@agm/core";
 import { NewCompanyComponent } from "./new-company/new-company.component";
+import { CompanyDetailviewComponent } from "./company-detailview/company-detailview.component";
+import { EmployeePortalComponent } from "./employee-portal/employee-portal.component";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +25,8 @@ import { NewCompanyComponent } from "./new-company/new-company.component";
     EmployeeComponent,
     NewEmployeeComponent,
     NewCompanyComponent,
+    CompanyDetailviewComponent,
+    EmployeePortalComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,7 @@ import { NewCompanyComponent } from "./new-company/new-company.component";
     HttpClientModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyAVhKvWwUe6Z0r6JglH6cUzO0qObcKVqCI",
+      apiKey: "",
     }),
   ],
   providers: [],

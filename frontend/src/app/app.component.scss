@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+#eportal {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+nav {
+  a {
+    text-decoration: none;
+  }
+
+  h1 {
+    font-family: "Pacifico", cursive;
+  }
+}
+
+main {
+  margin: 28px 16px;
+  overflow: auto;
+  flex-grow: 1;
+}

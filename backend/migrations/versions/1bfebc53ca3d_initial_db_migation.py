@@ -1,8 +1,8 @@
 """initial Db migation
 
-Revision ID: a8ade78066e2
+Revision ID: 1bfebc53ca3d
 Revises: 
-Create Date: 2021-02-06 00:36:17.214375
+Create Date: 2021-02-06 03:14:04.609530
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a8ade78066e2'
+revision = '1bfebc53ca3d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,14 +27,14 @@ def upgrade():
     )
     op.create_table('Address',
     sa.Column('aId', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('doorNo', sa.String(length=10), nullable=False),
+    sa.Column('doorNo', sa.String(length=10), nullable=True),
     sa.Column('streetName', sa.String(length=50), nullable=True),
     sa.Column('city', sa.String(length=45), nullable=False),
     sa.Column('state', sa.String(length=45), nullable=False),
     sa.Column('country', sa.String(length=45), nullable=False),
     sa.Column('pincode', sa.String(length=10), nullable=False),
     sa.Column('company_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['company_id'], ['Company.cId'], ),
+    sa.ForeignKeyConstraint(['company_id'], ['Company.cId'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('aId')
     )
     op.create_table('Employee',
@@ -46,7 +46,7 @@ def upgrade():
     sa.Column('DOB', sa.Date(), nullable=False),
     sa.Column('active', sa.Boolean(), nullable=False),
     sa.Column('company_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['company_id'], ['Company.cId'], ),
+    sa.ForeignKeyConstraint(['company_id'], ['Company.cId'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('eId')
     )
     # ### end Alembic commands ###

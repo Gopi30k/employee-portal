@@ -1,6 +1,6 @@
 from operator import add
 from app.main import db
-from app.main.model.effy_employee_portal import Company, Employee
+from app.main.model.effy_employee_portal import Company, Employee, Address
 from geopy.geocoders import Nominatim
 from .address_service import create_address
 
@@ -46,6 +46,17 @@ def create_company(company_data):
     }
 
 
+def address_as_string(address):
+    return """{doorNo} {street} {city} {pincode} {state} {country}""".format(
+        doorNo=address['doorNo'],
+        street=address['streetName'] if 'streetName' in address else '',
+        city=address['city'],
+        state=address['state'],
+        country=address['country'],
+        pincode=address['pincode']
+    )
+
+
 def getLatLong(address_string):
     # Fetch Latitude and longitude from GeoPy
     try:
@@ -71,7 +82,6 @@ def save_to_database(data):  # TODO : remove and make it a comman service method
 
 
 def delete_company(companyId):
-    breakpoint()
     try:
         # change employees company id to null
         employees = Employee.query.filter_by(company_id=companyId).all()
@@ -98,3 +108,36 @@ def delete_company(companyId):
         return {
             'message': """Error when deleting company"""
         }, 400
+
+
+def update_company(company):
+    # breakpoint()
+    companyUpdate = Company.query.filter_by(cId=company['cId'])
+    Address.query.filter_by(company_id=company['cId']).update(dict(doorNo=company['address']['doorNo'],
+                                                                   streetName=company['address']['streetName'],
+                                                                   city=company['address']['city'],
+                                                                   state=company['address']['state'],
+                                                                   country=company['address']['country'],
+                                                                   pincode=company['address']['pincode'],
+                                                                   ))
+    address_string = address_as_string(address=company['address'])
+    # Get latlong from address
+    latLong = getLatLong(address_string=address_string)
+    if (latLong):
+        company['latitude'], company['longitude'] = latLong
+        companyUpdate.update(dict(
+            name=company['name'], latitude=company['latitude'], longitude=company['longitude']))
+        db.session.commit()
+        return {
+            'message': 'Company updated'
+        }, 200
+
+    else:  # TODO:custom Exception
+        return {
+            'message': 'LatLong fetch from address failed'
+        }, 400
+
+
+def get_company_details(id):
+    # return db.session.query(Company, Employee).outerjoin(Employee).filter(Company.cId == id).first()
+    return Employee.query.filter(Employee.company_id == id).all()
