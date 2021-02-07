@@ -1,0 +1,47 @@
+:host {
+  ::ng-deep {
+    #employee-section {
+      .add-employee {
+        margin-bottom: 16px;
+      }
+
+      .ui-table {
+        .ui-table-thead {
+          tr {
+            th {
+              border: none;
+            }
+            :first-child {
+              border-top-left-radius: 8px;
+              // border-bottom-left-radius: 8px;
+              // border-top: 1px solid #c8c8c8;
+              // border-left: 1px solid #c8c8c8;
+            }
+            :last-child {
+              // border-bottom-right-radius: 8px;
+              // border-top: 1px solid #c8c8c8;
+              // border-right: 1px solid #c8c8c8;
+              border-top-right-radius: 8px;
+            }
+          }
+        }
+        .ui-table-tbody {
+          margin: 8px;
+          tr {
+            border-bottom: 1px solid #c8c8c8;
+            td {
+              border: none;
+              background: #fff;
+            }
+          }
+        }
+
+        .ui-paginator-bottom {
+          border: none;
+          border-bottom-right-radius: 8px;
+          border-bottom-left-radius: 8px;
+        }
+      }
+    }
+  }
+}

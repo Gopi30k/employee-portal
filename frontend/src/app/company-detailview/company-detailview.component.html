@@ -1,23 +1,25 @@
 <p-panel>
   <p-header>
-    <h1>{{ companyData?.name }}</h1>
-    <h4>
-      {{
-        companyData.address[0].doorNo +
-          " " +
-          companyData.address[0].streetName +
-          " " +
-          companyData.address[0].city +
-          " " +
-          companyData.address[0].pincode +
-          " " +
-          companyData.address[0].state +
-          " " +
-          companyData.address[0].country
-      }}
-    </h4>
-    <a (click)="displayMapModal = !displayMapModal">View Location</a>
-    <br />
+    <div class="company-details">
+      <h1>{{ companyData?.name }}</h1>
+      <h4>
+        {{
+          companyData.address[0].doorNo +
+            " " +
+            companyData.address[0].streetName +
+            " " +
+            companyData.address[0].city +
+            " " +
+            companyData.address[0].pincode +
+            " " +
+            companyData.address[0].state +
+            " " +
+            companyData.address[0].country
+        }}
+      </h4>
+      <a (click)="displayMapModal = !displayMapModal">View Location</a>
+    </div>
+
     <button
       pButton
       label="Add Employee"
@@ -75,12 +77,12 @@
   [draggable]="false"
 >
   <agm-map
-    [latitude]="+companyData.latitude"
-    [longitude]="+companyData.longitude"
+    [latitude]="+companyData?.latitude || 0.0"
+    [longitude]="+companyData?.longitude || 0.0"
   >
     <agm-marker
-      [latitude]="+companyData.latitude"
-      [longitude]="+companyData.longitude"
+      [latitude]="+companyData?.latitude || 0.0"
+      [longitude]="+companyData?.longitude || 0.0"
     ></agm-marker>
   </agm-map>
 </p-dialog>
