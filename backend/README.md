@@ -48,19 +48,21 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-6.) Run the Flask server
+6.) Enter MYSQL Database server details in .env file.
+
+7.) Run the Flask server
 
 ```bash
 python manage.py run
 ```
 
-7.) Server started
+8.) Server started
 
 ```bash
 http://127.0.0.1:5000
 ```
 
-8.) Database Migration Steps
+9.) Database Migration Steps
 
 ```bash
  py .\manage.py db init
@@ -71,7 +73,7 @@ http://127.0.0.1:5000
 For more :
 [visit](https://flask-migrate.readthedocs.io/en/latest/)
 
-9.) Database Models Testing via Shell
+10.) Database Models Testing via Shell
 
 ```bash
 from app.main import create_app, db
