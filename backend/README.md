@@ -50,24 +50,24 @@ pip install -r requirements.txt
 
 6.) Enter MYSQL Database server details in .env file.
 
-7.) Run the Flask server
+7.) Database Migration Steps 
+
+```bash
+ python manage.py db init
+ python manage.py db migrate --message 'initial Db migation'
+ python manage.py db upgrade
+```
+
+8.)  Run the Flask server
 
 ```bash
 python manage.py run
 ```
 
-8.) Server started
+9.) Server started 
 
 ```bash
 http://127.0.0.1:5000
-```
-
-9.) Database Migration Steps
-
-```bash
- py .\manage.py db init
- py .\manage.py db migrate --message 'initial Db migation'
- py .\manage.py db upgrade
 ```
 
 For more :
