@@ -53,8 +53,7 @@ pip install -r requirements.txt
 7.) Database Migration Steps 
 
 ```bash
- python manage.py db init
- python manage.py db migrate --message 'initial Db migation'
+ python manage.py db migrate 
  python manage.py db upgrade
 ```
 
