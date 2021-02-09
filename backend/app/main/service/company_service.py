@@ -138,6 +138,5 @@ def update_company(company):
         }, 400
 
 
-def get_company_details(id):
-    # return db.session.query(Company, Employee).outerjoin(Employee).filter(Company.cId == id).first()
-    return Employee.query.filter(Employee.company_id == id).all()
+def get_company_by_id(id):
+    return Company.query.filter(Company.cId == id).all()

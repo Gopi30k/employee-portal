@@ -2,7 +2,7 @@ from flask import request
 from flask_restx import Resource
 
 from ..util.dto import EmployeeDTO
-from ..service.employee_service import create_employee, get_all_employees, delete_employee, update_employee
+from ..service.employee_service import create_employee, get_all_employees, delete_employee, update_employee, get_employees_of_company
 
 api = EmployeeDTO.api
 _new_employee = EmployeeDTO.new_employee
@@ -39,3 +39,8 @@ class Employee(Resource):
     @api.doc('Delete an employee')
     def delete(self, id):
         return delete_employee(id)
+
+    @api.doc('get employees of company by id')
+    @api.marshal_list_with(_employees)
+    def get(Self, id):
+        return get_employees_of_company(id)

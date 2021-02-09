@@ -4,17 +4,17 @@
       <h1>{{ companyData?.name }}</h1>
       <h4>
         {{
-          companyData.address[0].doorNo +
+          companyData?.address[0].doorNo +
             " " +
-            companyData.address[0].streetName +
+            companyData?.address[0].streetName +
             " " +
-            companyData.address[0].city +
+            companyData?.address[0].city +
             " " +
-            companyData.address[0].pincode +
+            companyData?.address[0].pincode +
             " " +
-            companyData.address[0].state +
+            companyData?.address[0].state +
             " " +
-            companyData.address[0].country
+            companyData?.address[0].country
         }}
       </h4>
       <a (click)="displayMapModal = !displayMapModal">View Location</a>
@@ -49,7 +49,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-employee>
         <tr>
-          <td>{{ employee.firstName + " " + employee.lastName }}</td>
+          <td>{{ employee?.firstName + " " + employee?.lastName }}</td>
           <td>{{ employee?.email }}</td>
           <td>{{ employee?.designation }}</td>
           <td>{{ employee?.DOB }}</td>

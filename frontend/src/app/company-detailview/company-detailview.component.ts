@@ -25,11 +25,16 @@ export class CompanyDetailviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.companyData = history.state.data;
-    console.log(this.companyData);
+    // this.companyData = history.state.data;
+    // console.log(this.companyData);
 
     this.route.paramMap.subscribe((params) => {
       const id = +params.get("id");
+      this.dashboardService.getCompanyById(id).subscribe((data) => {
+        console.log(data);
+
+        this.companyData = data[0];
+      });
       this.dashboardService.getEmployeesofCompany(id);
       this.employeesOfCompany = this.dashboardService.employeesOfCompany$;
       // this.dashboardService.getEmployeesofCompany(id).subscribe(

@@ -76,3 +76,7 @@ def update_employee(employee):
                                                               ))
     db.session.commit()
     return True
+
+
+def get_employees_of_company(id):
+    return Employee.query.filter(Employee.company_id == id).all()
