@@ -92,11 +92,17 @@ export class DashboardService {
 
   getEmployeesofCompany(companyId: number) {
     return this.http
-      .get<Employee[]>(`http://127.0.0.1:5000/company/${companyId}`)
+      .get<Employee[]>(`http://127.0.0.1:5000/employee/${companyId}`)
       .pipe(catchError(this.handleError))
       .subscribe((data) => {
         this.employeesOfCompany.next(data);
       });
+  }
+
+  getCompanyById(companyId: number) {
+    return this.http
+      .get<Employee[]>(`http://127.0.0.1:5000/company/${companyId}`)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
